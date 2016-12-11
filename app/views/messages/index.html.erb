@@ -1,0 +1,39 @@
+<h1>Messages</h1>
+
+<button id="load_button">Load</button>
+
+<div id="container">
+	<script id="messages" type="text/ractive">
+	    <table class="table">
+	      <thead>
+	        <tr>
+			<th>ID</th>
+			<th>TITLE</th>
+			<th>DESCRIPTION</th>
+			<th>ACTIONS</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<tr>
+	      	{{#message}}
+		          <td><input class="form-control" value="{{id}}"></td>
+		          <td><input class="form-control" value="{{title}}"></td>
+		          <td><input class="form-control" value="{{description}}"></td>
+		          <td>
+		            <button class="btn btn-info" on-click="edit_message:{{id}}">Update</button>
+		          </td>
+	        {{/message}}
+			</tr>
+	      	{{#messages:index}}
+				<tr>
+					<td>{{id}}</td>
+					<td>{{title}}</td>
+					<td>{{description}}</td>
+		          	<td><button class="btn btn-danger" on-click="delete_message:{{id}}">Delete</button></td>
+		          	<td><button class="btn btn-warning" on-click="select_message:{{id}}">Edit</button></td>
+		      	</tr>
+	      	{{/messages}}
+	      </tbody>
+		</table>
+	</script>
+</div>
