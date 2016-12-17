@@ -8,9 +8,9 @@ $(document).ready(function(){
   ractive.on({
   	select_message: function(ev, id){
   		for(var key in store.getState().messages){
-  			if(store.getState().messages[key].id == id){
-  				this.set('message', store.getState().messages[key]);
-  			}
+  			// if(store.getState().messages[key].id == id){
+  			// 	this.set('message', store.getState().messages[key]);
+  			// }
   		}
   	},
   	edit_message: function(ev, id){
