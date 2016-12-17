@@ -1,1 +1,2 @@
 var ADD_FILE = 'ADD_FILE';
+var DELETE_FILE = 'DELETE_FILE';
