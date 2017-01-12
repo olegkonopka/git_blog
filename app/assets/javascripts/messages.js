@@ -8,19 +8,28 @@ $(document).ready(function(){
   ractive.on({
   	select_message: function(ev, id){
   		for(var key in store.getState().messages){
-  			// if(store.getState().messages[key].id == id){
-  			// 	this.set('message', store.getState().messages[key]);
-  			// }
+  			if(store.getState().messages[key].id == id){
+  				ractive.set('message', store.getState().messages[key]);
+  			}
   		}
   	},
   	edit_message: function(ev, id){
+  		for(var i = 0; i < store.getState().messages.length; i++){
+  			if(store.getState().messages[i].id === id){
+  				$.ajax({
+  					url: "messages/edit_message",
+  					type: "POST",
+  					data: {message: store.getState().messages[i]}
+  				})
+  			}
+  		}
   		store.dispatch(edit(id));
-  		ractive.set("messages", store.getState().messages);
-  		//$('#edit').hide();
+  		ractive.set("messages", store.getState());
+  		ractive.set("message", {});
   	},
   	delete_message: function(ev, id){
   		store.dispatch(delete_message(id));
-  		//ractive.set("messages", store.getState().messages);
+  		ractive.set("messages", store.getState());
   	}
   });
 

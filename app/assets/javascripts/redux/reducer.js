@@ -12,14 +12,14 @@ function load_messages(data){
 function edit(id){
 	return {
 		type: EDIT_MESSAGE,
-		message: id
+		payload: id
 	}
 }
 
 function delete_message(id){
 	return {
 		type: DELETE_MESSAGE,
-		message: id
+		payload: id
 	}
 }
 
@@ -37,7 +37,7 @@ function reducer(state, action){
 			new_state.messages = action.payload
 			return new_state
 		case EDIT_MESSAGE:
-			store.getState().messages.map((message, id) => {
+			state.messages.map((message, id) => {
 				if(id === action.id){
 					return $.extend(true, {
 						id: action.id,

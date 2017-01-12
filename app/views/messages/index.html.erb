@@ -15,14 +15,14 @@
 	      </thead>
 	      <tbody>
 	      	<tr>
-	      	{{#message}}
-		          <td><input class="form-control" value="{{id}}"></td>
-		          <td><input class="form-control" value="{{title}}"></td>
-		          <td><input class="form-control" value="{{description}}"></td>
-		          <td>
-		            <button class="btn btn-info" on-click="edit_message:{{id}}">Update</button>
-		          </td>
-	        {{/message}}
+		      	{{#message}}
+			          <td><input class="form-control" value="{{id}}"></td>
+			          <td><input class="form-control" value="{{title}}"></td>
+			          <td><input class="form-control" value="{{description}}"></td>
+			          <td>
+			            <button class="btn btn-info" on-click="edit_message:{{id}}">Update</button>
+			          </td>
+		        {{/message}}
 			</tr>
 	      	{{#messages:index}}
 				<tr>

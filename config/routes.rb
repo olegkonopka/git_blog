@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :messages
   get '/load_messages' => "messages#load_messages"
+  post 'messages/edit_message' => "messages#edit_message"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
