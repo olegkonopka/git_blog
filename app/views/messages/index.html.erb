@@ -14,26 +14,31 @@
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<tr>
-		      	{{#message}}
-			          <td><input class="form-control" value="{{id}}"></td>
-			          <td><input class="form-control" value="{{title}}"></td>
-			          <td><input class="form-control" value="{{description}}"></td>
-			          <td>
-			            <button class="btn btn-info" on-click="edit_message:{{id}}">Update</button>
-			          </td>
-		        {{/message}}
-			</tr>
 	      	{{#messages:index}}
 				<tr>
-					<td>{{id}}</td>
-					<td>{{title}}</td>
-					<td>{{description}}</td>
-		          	<td><button class="btn btn-danger" on-click="delete_message:{{id}}">Delete</button></td>
-		          	<td><button class="btn btn-warning" on-click="select_message:{{id}}">Edit</button></td>
+				{{>message}}
 		      	</tr>
 	      	{{/messages}}
 	      </tbody>
 		</table>
+
+
+		{{#message}}
+			<p>Edit Message</p>
+			<input type="text" value="{{message.id}}">	 
+			<input type="text" value="{{message.title}}">	 
+			<input type="text" value="{{message.description}}">
+		    <td><button class="btn btn-warning" on-click="edit_message:{{message}}">Edit</button></td>
+			<td><button class="btn btn-warning" on-click="add_message:{{message}}">Add</button></td>
+			<td><button class="btn btn-warning" on-click="create_message:{{message}}">Create</button></td>
+		{{/message}}
+
+		{{#partial message}}
+			<td>{{id}}</td>
+			<td>{{title}}</td>
+			<td>{{description}}</td>
+          	<td><button class="btn btn-danger" on-click="delete_message:{{messages[index]}}">Delete</button></td>
+          	<td><button class="btn btn-warning" on-click="select_message:{{messages[index]}}">Edit</button></td>
+		{{/partial}}
 	</script>
 </div>

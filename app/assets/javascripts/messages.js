@@ -6,32 +6,51 @@ $(document).ready(function(){
   });
 
   ractive.on({
-  	select_message: function(ev, id){
-  		for(var key in store.getState().messages){
-  			if(store.getState().messages[key].id == id){
-  				ractive.set('message', store.getState().messages[key]);
-  			}
-  		}
+  	select_message: function(ev, message){
+  		// console.log(message);
+  		store.dispatch(view_message(message));
+  		this.set(store.getState());
   	},
-  	edit_message: function(ev, id){
-  		for(var i = 0; i < store.getState().messages.length; i++){
-  			if(store.getState().messages[i].id === id){
-  				$.ajax({
-  					url: "messages/edit_message",
-  					type: "POST",
-  					data: {message: store.getState().messages[i]}
-  				})
+  	edit_message: function(ev, message){
+  		$.ajax({
+  			url: "/edit_message",
+  			type: "POST",
+  			data: {"message": message},
+  			success: function(resp){
+  				if(resp){
+  					store.dispatch(edit_message(resp));
+  					ractive.set(store.getState());
+  				}
   			}
-  		}
-  		store.dispatch(edit(id));
-  		ractive.set("messages", store.getState());
-  		ractive.set("message", {});
+  		})
   	},
-  	delete_message: function(ev, id){
-  		store.dispatch(delete_message(id));
-  		ractive.set("messages", store.getState());
+  	delete_message: function(ev, message){
+  		$.ajax({
+  			url: "/delete",
+  			type:  "POST",
+  			data: {"id": message.id},
+  			success: function(resp){
+  				store.dispatch(load_messages(resp));
+  			}
+  		})
+  		ractive.set(store.getState());
+  	},
+  	add_message: function(ev){
+  		store.dispatch(add_message({id: "", title: "", description: ""}));
+  		this.set(store.getState());
+  	},
+  	create_message: function(ev, message){
+  		$.ajax({
+  			url: "/create_message",
+  			type: "POST",
+  			data: {"message": message},
+  			success: function(resp){
+  				console.log(resp);
+  			}
+  		})
   	}
   });
+	// store.subscribe(ractive.render_messages);
 
   $('#load_button').on('click', function(){
   	$.ajax({
@@ -39,7 +58,7 @@ $(document).ready(function(){
   		type: 'GET',
   		success: function(resp){
   			store.dispatch(load_messages(resp));
-  			ractive.set("messages", store.getState().messages)
+  			ractive.set(store.getState())
   		}
   	})
   });
