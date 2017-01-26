@@ -2,8 +2,10 @@
 
 <button id="load_button">Load</button>
 
+
 <div id="container">
 	<script id="messages" type="text/ractive">
+		{{#if status == "load"}}
 	    <table class="table">
 	      <thead>
 	        <tr>
@@ -16,29 +18,24 @@
 	      <tbody>
 	      	{{#messages:index}}
 				<tr>
-				{{>message}}
+				<td>{{id}}</td>
+				<td>{{title}}</td>
+				<td>{{description}}</td>
+	          	<td><button class="btn btn-danger" on-click="delete_message:{{messages[index]}}">Delete</button></td>
+	          	<td><button class="btn btn-warning" on-click="select_message:{{messages[index]}}">Edit</button></td>
 		      	</tr>
 	      	{{/messages}}
 	      </tbody>
 		</table>
-
-
-		{{#message}}
-			<p>Edit Message</p>
-			<input type="text" value="{{message.id}}">	 
-			<input type="text" value="{{message.title}}">	 
-			<input type="text" value="{{message.description}}">
-		    <td><button class="btn btn-warning" on-click="edit_message:{{message}}">Edit</button></td>
-			<td><button class="btn btn-warning" on-click="add_message:{{message}}">Add</button></td>
-			<td><button class="btn btn-warning" on-click="create_message:{{message}}">Create</button></td>
-		{{/message}}
-
-		{{#partial message}}
-			<td>{{id}}</td>
-			<td>{{title}}</td>
-			<td>{{description}}</td>
-          	<td><button class="btn btn-danger" on-click="delete_message:{{messages[index]}}">Delete</button></td>
-          	<td><button class="btn btn-warning" on-click="select_message:{{messages[index]}}">Edit</button></td>
-		{{/partial}}
+		{{/if}}
 	</script>
 </div>
+
+
+<div id="message">
+</div>
+
+
+
+
+<%= render "messages/edit_message" %>

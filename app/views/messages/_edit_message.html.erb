@@ -1,0 +1,16 @@
+<script id="js_message" type="text/ractive">
+	{{#message}}
+		<input type="text" value="{{message.id}}">
+		<input type="text" value="{{message.title}}">
+		<select value="{{title}}">
+			{{#titles:index}}
+				<option>{{titles[index]}}</option>
+			{{/titles}}
+		</select>
+		<input type="text" value="{{message.description}}">
+	    <td><button class="btn btn-warning" on-click="save_message:{{message}}">Save</button></td>
+	    <td><button class="btn btn-warning" id="add_message" on-click="add_message:{{}}">Add</button></td>
+	    <td><button class="btn btn-warning" id="create_message" style="display:none;" on-click="create_message:{{message}}">Create</button></td>
+	{{/message}}	
+</script>
+

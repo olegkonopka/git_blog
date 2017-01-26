@@ -59,10 +59,12 @@ function reducer(state, action){
 		case LOAD_MESSAGES:
 			var new_state = $.extend(true, {}, state);
 			new_state.messages = action.payload
+			new_state.status = "load"
 			return new_state
 		case VIEW_MESSAGE:
 			var new_state = $.extend(true, {}, state);
 			new_state.message = action.payload
+			new_state.status = "view_message";
 			return new_state		
 		case EDIT_MESSAGE:
 			var new_state = $.extend(true, {}, state);
@@ -75,7 +77,7 @@ function reducer(state, action){
 					};
 				}
 			})
-			return new_state.messages
+			return new_state
 		case DELETE_MESSAGE:
 			var message_id = action.message;
 			return store.getState().messages.filter(message => message.id !== message_id)
